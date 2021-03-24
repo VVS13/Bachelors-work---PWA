@@ -6,8 +6,11 @@ const mongoose = require('mongoose')
 
 const app = express()
 
-const PORT = config.get('port') || 5000
+// in '' is prefix for future path
+app.use('/api/auth',require('./routes/auth.routes'))
 
+
+const PORT = config.get('port') || 5000
 
 async function start(){
     try{
