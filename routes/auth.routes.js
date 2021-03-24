@@ -2,13 +2,29 @@ const{Router} = require ('express')
 
 const bcrypt = require('bcryptjs') //allows to hash password and to compare them
 
+const {check, validationResult} = require('express-validator')
+
 const User = require('../models/User')
 
 const router = Router()
 
 // /api/auth/register
-router.post('/register',async (req, res) =>{
+router.post('/register',
+[
+    check('username','Not correct username').isAlphanumeric(),
+    check('password','Minimal lenght of password is 3 symbols').isLength({min:3})
+],
+async (req, res) =>{
     try{
+        const errors = validationResult(req)
+
+        if(!errors.isEmpty()){
+            return res.status(400).json({
+                errors: errors.array(),
+                message: 'Incorrect information'
+            })
+            
+        }
 
         const {username, password} = req.body
         //need to create validations so no faultry input is accepted
