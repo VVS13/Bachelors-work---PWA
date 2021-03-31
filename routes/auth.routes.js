@@ -83,7 +83,7 @@ async (req, res) =>{
 
         const token = jwt.sign(
             { userId: user.id}, //data that will be cyphered in token 
-            config.get('jwtSecreKey'),
+            config.get('jwtSecretKey'),
             {expiresIn:'3h'}
         )
 
