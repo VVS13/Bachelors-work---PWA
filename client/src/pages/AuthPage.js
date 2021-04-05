@@ -11,18 +11,18 @@ export const AuthPage = () => {
         setForm({ ...form, [event.target.name]: event.target.value })
     }
 
-    // const {loading,request} = useHttp() //es lint error... need to remove 'error' to check if everything
+    const {loading,request} = useHttp() //es lint error... need to remove 'error' to check if everything
 
-    // const registerHandler = async () => {
-    //     try {
+    const registerHandler = async () => {
+        try {
 
-    //         const data = await request('/api/auth/register','POST', {...form}) //url...method... data that needed to transfered to server
-    //         console.log('Data',data)
+            const data = await request('/api/auth/register','POST', {...form}) //url...method... data that needed to transfered to server
+            console.log('Data',data)
 
-    //     } catch (e) {
+        } catch (e) {
             
-    //     }
-    // }
+        }
+    } 
 
     return (
         <div className="container"> 
@@ -64,8 +64,8 @@ export const AuthPage = () => {
 
                         <button className="btn btn-success container-fluid "
                         type="submit" 
-                        //onClick={registerHandler}
-                        //disabled={loading}
+                        onClick={registerHandler}
+                        disabled={loading}
                         >Register</button>
 
                     </div>
@@ -73,7 +73,7 @@ export const AuthPage = () => {
 
                         <button className="btn btn-warning container-fluid"
                          type="submit" 
-                         //disabled={loading}
+                         disabled={loading}
                          >Login</button>
 
                     </div>
