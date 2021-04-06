@@ -12,6 +12,8 @@ const User = require('../models/User')
 
 const router = Router()
 
+
+
 // /api/auth/register
 router.post('/register',
 [
@@ -20,6 +22,7 @@ router.post('/register',
 ],
 async (req, res) =>{
     try{
+
         console.log('Data received:', req.body)  
         //undefined ?  
 

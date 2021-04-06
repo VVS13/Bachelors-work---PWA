@@ -56,9 +56,10 @@ export const useHttp = () => {
     const request = useCallback( async (url, method = 'GET', body = null, headers = {}) => {
         setLoading(true)
 
-        //if body exists stringify it and return data 
+        //console.log('bdy in hook', body )
+        //if body exists stringify 
         if (body){
-            body = JSON.stringify(body) //still undefined ? front end ?
+            body = JSON.stringify(body) //still undefined ? 
         }
 
 

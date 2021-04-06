@@ -3,11 +3,15 @@ console.log('App!')
 const express = require('express')
 const config = require('config')
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
 
 const app = express()
 
 // in '' is prefix for future path
 app.use('/api/auth',require('./routes/auth.routes'))
+
+app.use(bodyParser.json())
+
 
 
 const PORT = config.get('port') || 5000
