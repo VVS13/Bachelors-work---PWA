@@ -55,6 +55,14 @@ export const useHttp = () => {
 
     const request = useCallback( async (url, method = 'GET', body = null, headers = {}) => {
         setLoading(true)
+
+        //if body exists stringify it and return data 
+        if (body){
+            body = JSON.stringify(body) //still undefined ? front end ?
+        }
+
+
+
         try{
             const response = await fetch (url, {method,body,headers})
             const data = await response.json()

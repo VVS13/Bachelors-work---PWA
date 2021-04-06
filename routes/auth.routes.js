@@ -20,6 +20,10 @@ router.post('/register',
 ],
 async (req, res) =>{
     try{
+        console.log('Data received:', req.body)  
+        //undefined ?  
+
+
         const errors = validationResult(req)
 
         if(!errors.isEmpty()){
