@@ -7,10 +7,13 @@ const bodyParser = require('body-parser')
 
 const app = express()
 
+app.use(bodyParser.json())
 // in '' is prefix for future path
 app.use('/api/auth',require('./routes/auth.routes'))
 
-app.use(bodyParser.json())
+//app.use(express.json()) //built in express
+//app.use(bodyParser.json())  //great just had to move it higher sadbfgkjasbdgkjhvb
+//app.use(bodyParser.urlencoded({ extended: true }));
 
 
 
