@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState} from 'react'
 import {useHttp} from '../hooks/http.hook'
 
 export const AuthPage = () => {
@@ -13,6 +13,7 @@ export const AuthPage = () => {
 
     const {loading,request} = useHttp() //es lint error... need to remove 'error' to check if everything
 
+   
     const registerHandler = async () => {
         try {
 

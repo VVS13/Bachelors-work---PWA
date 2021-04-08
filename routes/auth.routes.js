@@ -18,7 +18,7 @@ const router = Router()
 router.post('/register',
 [
     check('username','Not correct username').isAlphanumeric(),
-    check('password','Minimal lenght of password is 3 symbols').isLength({min:3})
+    check('password','Minimal lenght of password is 3 symbols').isLength({min:2})
 ],
 async (req, res) =>{
     try{
@@ -46,17 +46,26 @@ async (req, res) =>{
             return res.status(400).json({message:'User already exists'})
         }
 
+
         const hashedPassword = await bcrypt.hash(password,12)
-        const user = new User({email, password: hashedPassword})
+
+        const user = new User({username, password: hashedPassword})
+
 
         await user.save()
 
         res.status(201).json({message:'User created'})
 
+        
+
     }catch(e){
         res.status(500).json({message: 'Something went wrong, try again'})
     }
 } )
+
+
+
+
 
 // /api/auth/login
 router.post('/login',
