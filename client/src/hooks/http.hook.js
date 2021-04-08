@@ -59,7 +59,8 @@ export const useHttp = () => {
         //console.log('bdy in hook', body )
         //if body exists stringify 
         if (body){
-            body = JSON.stringify(body) //still undefined ? 
+            body = JSON.stringify(body) 
+            headers['Content-Type'] = 'application/json'
         }
 
 
