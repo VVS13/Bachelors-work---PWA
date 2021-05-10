@@ -1,5 +1,5 @@
 {
     "port": 5000,
     "mongoUri": "mongodb+srv://admin:admintable11@cluster0.hj821.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-    "jwtSecreKey": "ExTrA sEcUrE kEy 1738"
+    "jwtSecretKey": "ExTrA sEcUrE kEy 1738"
 }

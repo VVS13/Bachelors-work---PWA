@@ -25,6 +25,17 @@ export const AuthPage = () => {
         }
     } 
 
+    const loginHandler = async () => {
+        try {
+
+            const data = await request('/api/auth/login','POST', {...form}) //url...method... data that needed to transfered to server
+            console.log('Data',data)
+
+        } catch (e) {
+            
+        }
+    } 
+
     return (
         <div className="container"> 
             <h1>Auth Page</h1>
@@ -74,6 +85,7 @@ export const AuthPage = () => {
 
                         <button className="btn btn-warning container-fluid"
                          type="submit" 
+                         onClick={loginHandler}
                          disabled={loading}
                          >Login</button>
 
