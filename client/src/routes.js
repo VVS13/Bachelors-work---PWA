@@ -7,17 +7,17 @@ import {AuthPage} from './pages/AuthPage'
 
 
 export const useRoutes = isAuthenticated => {
-    if (isAuthenticated) {
+    if (!!isAuthenticated) {
         return (
             <Switch>
                 <Route path="/main_page">
-                    <MainPage />
+                    <MainPage/>
                 </Route>
                 <Route path="/create_room">
-                    <CreateRoom />
+                    <CreateRoom/>
                 </Route>
                 <Route path="/note_room/:id">
-                    <NoteRoom />
+                    <NoteRoom/>
                 </Route>
             </Switch>
         )

@@ -1,7 +1,11 @@
 import React, { useState} from 'react'
 import {useHttp} from '../hooks/http.hook'
+import {useContext} from 'react'
+import {AuthContext} from '../context/AuthContext'
 
 export const AuthPage = () => {
+
+    const auth = useContext(AuthContext) // auth with all the methods  login logout
 
     const [form,setForm] = useState({
         username: '',password:''
@@ -29,12 +33,17 @@ export const AuthPage = () => {
         try {
 
             const data = await request('/api/auth/login','POST', {...form}) //url...method... data that needed to transfered to server
-            console.log('Data',data)
+
+            auth.login(data.token, data.userId)
+
+            //console.log('Data',data)
 
         } catch (e) {
             
         }
     } 
+
+    
 
     return (
         <div className="container"> 

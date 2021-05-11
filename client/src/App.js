@@ -1,21 +1,27 @@
 import React from 'react'
 import {BrowserRouter as Router} from 'react-router-dom'
 import { useRoutes } from './routes'
+import {useAuth} from './hooks/auth.hook'
+import {AuthContext} from './context/AuthContext'
 
 import "../node_modules/bootstrap/dist/css/bootstrap.css"
 
 
 function App() {
-  const routes = useRoutes(false)
+
+  const {token,login,logout,userId,isAuthenticated} = useAuth()
+  const isAuthenticated = !!token
+  const routes = useRoutes(isAuthenticated) //changed true/false to be dynamic
   return (
-    <Router>
+    <AuthContext.Provider value={{token,userId, login, logout, isAuthenticated}}>
+      <Router>
       <div >
         <h1>          
         {routes}
         </h1>
       </div>
-      
-    </Router>
+      </Router>
+    </AuthContext.Provider>
     
   )
 }
