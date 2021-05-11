@@ -84,7 +84,7 @@ async (req, res) =>{
             })
             
         }
-        console.log('Here 1') 
+        //console.log('Here 1') 
 
         const {username, password} = req.body
         const user = await User.findOne({username})
@@ -92,7 +92,7 @@ async (req, res) =>{
             return res.status(400),json({message:'No such user exists!'})
         }//
 
-        console.log('Here 2') 
+        //console.log('Here 2')  
 
         const isMatch = await bcrypt.compare(password, user.password)
 
@@ -100,7 +100,7 @@ async (req, res) =>{
             return res.status(400).json({message:'Incorrect password!'})
         }//
 
-        console.log('Here 3') 
+        //console.log('Here 3') 
 
         const token = jwt.sign(
             { userId: user.id}, //data that will be cyphered in token 
@@ -108,11 +108,11 @@ async (req, res) =>{
             {expiresIn:'3h'}
         )
 
-        console.log('Here 4') 
+        //console.log('Here 4') 
 
         res.json({token, userId: user.id})
 
-        console.log('Here 5') 
+        //console.log('Here 5') 
 
     }catch(e){
         res.status(500).json({message: 'Something went wrong, try again'})
