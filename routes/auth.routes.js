@@ -78,29 +78,35 @@ async (req, res) =>{
         const errors = validationResult(req)
 
         if(!errors.isEmpty()){
-            return res.status(400).json({
+            res.status(400).json({
                 errors: errors.array(),
                 message: 'Incorrect information'
             })
-            
+            return 
         }
-        //console.log('Here 1') 
+        console.log('Here 1') 
 
         const {username, password} = req.body
         const user = await User.findOne({username})
+
+        console.log('Here 1.5') 
+
+
         if(!user) {
-            return res.status(400),json({message:'No such user exists!'})
+            res.status(400).json({message:'No such user exists!'})
+            return
         }//
 
-        //console.log('Here 2')  
+        console.log('Here 2')  
 
         const isMatch = await bcrypt.compare(password, user.password)
 
         if (!isMatch){
-            return res.status(400).json({message:'Incorrect password!'})
+            res.status(400).json({message:'Incorrect password!'})
+            return 
         }//
 
-        //console.log('Here 3') 
+        console.log('Here 3') 
 
         const token = jwt.sign(
             { userId: user.id}, //data that will be cyphered in token 
@@ -108,11 +114,11 @@ async (req, res) =>{
             {expiresIn:'3h'}
         )
 
-        //console.log('Here 4') 
+        console.log('Here 4') 
 
         res.json({token, userId: user.id})
 
-        //console.log('Here 5') 
+        console.log('Here 5') 
 
     }catch(e){
         res.status(500).json({message: 'Something went wrong, try again'})

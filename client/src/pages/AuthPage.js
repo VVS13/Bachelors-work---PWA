@@ -15,14 +15,15 @@ export const AuthPage = () => {
         setForm({ ...form, [event.target.name]: event.target.value })
     }
 
-    const {loading,request} = useHttp() //es lint error... need to remove 'error' to check if everything
+    const {loading,request} = useHttp() //es lint ... need to remove 'error' to check  everything
 
    
     const registerHandler = async () => {
         try {
 
             const data = await request('/api/auth/register','POST', {...form}) //url...method... data that needed to transfered to server
-            console.log('Data',data)
+            
+            console.log('Data',data)/////////////////////////
 
         } catch (e) {
             

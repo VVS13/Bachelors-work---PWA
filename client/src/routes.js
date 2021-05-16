@@ -6,8 +6,10 @@ import {NoteRoom} from './pages/NoteRoom'
 import {AuthPage} from './pages/AuthPage'
 
 
+
+
 export const useRoutes = isAuthenticated => {
-    if (!!isAuthenticated) {
+    if (isAuthenticated) {
         return (
             <Switch>
                 <Route path="/main_page">
@@ -22,6 +24,7 @@ export const useRoutes = isAuthenticated => {
             </Switch>
         )
     }
+
     return (
         <Switch>
             <Route path="/" exact>

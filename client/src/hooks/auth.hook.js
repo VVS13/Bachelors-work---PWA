@@ -1,6 +1,6 @@
 //need to hold jwt in local storage 
 
-import {useState, useCallback} from 'react'
+import {useState, useCallback, useEffect} from 'react'  //
 
 const storageName = 'userData'
 
@@ -12,7 +12,7 @@ export const useAuth = () => {
     const login = useCallback((jwtToken,id) => {  //
         setToken(jwtToken)
         setUserId(id)
-        localStorage.setItem(storageName, JSON.stringify({token: jwtToken, userId: id}))
+        localStorage.setItem(storageName, JSON.stringify({token: jwtToken, userId: id})) //userId, token
 
     },[])
 
@@ -22,5 +22,13 @@ export const useAuth = () => {
         localStorage.removeItem(storageName)
     },[])
 
+    useEffect (() => {
+        const data = JSON.parse(localStorage.getItem(storageName))
+        if(data!=null &&data.token!=null){
+            login(data.token,data.userId)
+        }
+    },[login])
+
+    
     return{login,logout,userId,token}
 }
