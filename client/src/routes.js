@@ -5,7 +5,7 @@ import {CreateRoom} from './pages/CreateRoom'
 import {NoteRoom} from './pages/NoteRoom'
 import {AuthPage} from './pages/AuthPage'
 
-
+// at this point is not being used ... exists for refference 
 
 
 export const useRoutes = isAuthenticated => {
