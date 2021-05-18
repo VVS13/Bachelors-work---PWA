@@ -22,7 +22,11 @@ function App() {
 
   //const routes = useRoutes(isAuthenticated) //changed true/false to be dynamic
 
-  console.log(isAuthenticated,'bruh')
+  console.log(isAuthenticated,'bruh') 
+
+  //gives 2 outputs one false and one true... if user is loged in screen flashes 
+  //useEffect is being slow in auth.hook,js.... need another check or usestate to fix it 
+  //in that case a loading screen *could* be needed 
 
   return (
 
