@@ -1,7 +1,7 @@
 import {React} from 'react'
 import {BrowserRouter as Router} from 'react-router-dom'
 
-import {Switch, Route, Redirect, Link} from 'react-router-dom'
+import {Switch, Route, Redirect} from 'react-router-dom' //,history
 
 //import {useRoutes} from './routes'
 import {useAuth} from './hooks/auth.hook'
@@ -12,10 +12,15 @@ import {CreateRoom} from './pages/CreateRoom'
 import {NoteRoom} from './pages/NoteRoom'
 import {AuthPage} from './pages/AuthPage'
 
+import {Navbar} from './components/Navbar'
+
 import "../node_modules/bootstrap/dist/css/bootstrap.css"
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 function App() {
+
+  //const history = useHistory()
 
   const {token,login,logout,userId,readLoginStatus} = useAuth()
   const isAuthenticated = !!token //
@@ -38,7 +43,9 @@ function App() {
   
             {isAuthenticated? (
             <>
-            
+
+            <Navbar/>
+
             <Route exact path="/">
               
               <MainPage />

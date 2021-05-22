@@ -23,7 +23,7 @@ export const useAuth = () => {
         setUserId(null)
         localStorage.removeItem(storageName)
 
-        setLoginStatus(false)///////////
+        //setLoginStatus(false)///////////
         setFirstTime(false)
 
     },[])
