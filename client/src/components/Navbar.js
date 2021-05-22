@@ -31,7 +31,7 @@ export const Navbar = () => {
                 {/*  span after home is not working <span class="sr-only">(current)</span> */}
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="create_room">Features</a>
+                <a class="nav-link" href="create_room">Create room</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/" onClick={logoutHandler} >Logout</a>
