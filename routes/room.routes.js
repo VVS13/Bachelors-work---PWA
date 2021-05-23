@@ -12,16 +12,20 @@ router.post('/create_room',authM,async (req, res) => {
     //and I could identify user through it by getting id
     try{
 
-        
+        console.log('11')
+
         const {room_name} = req.body
 
         //maybe need to asign and generate unique in app link for room
 
         //const baseUrl = config.get('baseUrl') 
 
+        console.log(room_name) //undefined ?????????? solve problem
+
         const room = new Room ({
-            room_name,owner: req.user.userId
+            room_name , owner: req.user.userId
         })
+        //console.log(room) // ok output but no room name 
 
         await room.save()
 

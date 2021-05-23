@@ -1,6 +1,31 @@
-import React from 'react'
+
+import React, {useState} from 'react'
+import {useHttp} from '../hooks/http.hook'
+import {useContext} from 'react'
+import {AuthContext} from '../context/AuthContext'
 
 export const CreateRoom = () => {
+
+    const {request} = useHttp() 
+    const [room_name, setRoomName] = useState('')
+    const auth = useContext(AuthContext) //has token 
+    
+    const createRoomHandler = async event => { 
+        //on click event , need to use async if i want to use await
+        try{
+
+            const data = await request('/api/room/create_room','POST',{from: room_name},
+             {Authorization:`Bearer ${auth.token}`
+            }) 
+            //api to perform/method that is being used/data needed for api, gathered using value field
+
+            console.log(data)
+
+        }catch(e){
+            
+        }
+    }
+
     return (
         <div style={{padding: '1rem 2rem'}}>
 
@@ -40,6 +65,8 @@ export const CreateRoom = () => {
                 type="text" 
                 id="new room name"  
                 name="room name"
+                value={room_name}
+                onChange={e => setRoomName(e.target.value)}
                 ></input>
                 <br/>
             </div>
@@ -48,6 +75,7 @@ export const CreateRoom = () => {
             <div>
                 <button className="btn btn-success container-fluid "
                 type="submit" 
+                onClick={createRoomHandler} //
                 >Create</button>
             </div>
 
