@@ -34,7 +34,8 @@ function App() {
   //in that case a loading screen *could* be needed 
 
   if(!readLoginStatus){
-    return (<div>I guess it is loading...</div>)
+    //i can return/make here a component that will display loading screen
+    return (<div>LOADING...</div>)
   }else{
     return (
       <AuthContext.Provider value={{token,userId, login, logout, isAuthenticated}}>

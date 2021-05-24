@@ -12,7 +12,7 @@ router.post('/create_room',authM,async (req, res) => {
     //and I could identify user through it by getting id
     try{
 
-        console.log('11')
+        //console.log(req.body,'11')
 
         const {room_name} = req.body
 
@@ -20,18 +20,20 @@ router.post('/create_room',authM,async (req, res) => {
 
         //const baseUrl = config.get('baseUrl') 
 
-        console.log(room_name) //undefined ?????????? solve problem
-
         const room = new Room ({
             room_name , owner: req.user.userId
         })
+
+
         //console.log(room) // ok output but no room name 
 
-        await room.save()
+        await room.save() 
+        //is not saveing probably becasue room name is required but not imputed
+        res.json(room)
 
-        res.status.json({room})
 
     }catch (e){
+        console.log(e)
         res.status(500).json({message: 'Something went wrong, try again'})
     }
 
@@ -45,7 +47,8 @@ router.get('/',authM, async (req, res) => {
         //can request user through authM because it decodes token and toke holds user id
 
         //will find all rooms by owner
-        //need also to find them by user if he is in invited array of room
+
+        //need also to find them by user if he is in invited array of room...
 
 
         
