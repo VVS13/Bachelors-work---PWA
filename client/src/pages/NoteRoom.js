@@ -46,6 +46,7 @@ export const NoteRoom = () => {
         <div>
             <h1>NoteRoom</h1>
             <RoomDiv room ={room}/>
+            
         </div>
     )
 }

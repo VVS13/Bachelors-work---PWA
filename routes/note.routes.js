@@ -1,27 +1,24 @@
-const {Router} = require('express')
+const {Router,Date} = require('express')
 
-const Room = require('../models/Room')
+const Note = require('../models/Note')
 
 const authM = require('../middleware/auth.middleware')
 //const config = require('config') // for base url
 
 const router = Router()
 
-router.post('/create_room',authM,async (req, res) => {
-    //added authM so non authentificated users could not create rooms
-    //and I could identify user through it by getting id
+router.post('/create_note',authM,async (req, res) => {
+
     try{
 
-        //console.log(req.body,'11')
+        const {name} = req.body
 
-        const {room_name} = req.body
+        const {text} = req.body
 
-        //maybe need to asign and generate unique in app link for room
+        //const {creation_time} = {new Date(note.date).toLocaleDateString()}
 
-        //const baseUrl = config.get('baseUrl') 
-
-        const room = new Room ({
-            room_name , owner: req.user.userId
+        const note = new Note ({
+            note_name: name, note_text:text
         })
 
 
@@ -66,17 +63,6 @@ router.get('/',authM, async (req, res) => {
 
         
         res.json(rooms)
-    }catch (e){
-        res.status(500).json({message: 'Something went wrong, try again'})
-    }
-})
-
-router.get('/:id',authM, async (req, res) => {
-    //so not authenticated user could not get to room by id
-    try{
-        const room = await Room.findById(req.params.id)
-        res.json(room)
-
     }catch (e){
         res.status(500).json({message: 'Something went wrong, try again'})
     }

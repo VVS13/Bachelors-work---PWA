@@ -14,7 +14,6 @@ import {AuthPage} from './pages/AuthPage'
 
 import {Navbar} from './components/Navbar'
 
-import "../node_modules/bootstrap/dist/css/bootstrap.css"
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 

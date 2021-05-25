@@ -4,11 +4,12 @@ const schema = new Schema({
 
     note_name: {type: String, required: true},
 
+    note_text: {type: String, required: true},
 
     note_creation_time: {type: Date, required: true},
     //{new Date(note.date).toLocaleDateString()}
 
-    note_deletion_time: {type: Date, required: true},
+    note_deletion_time: {type: Date},
 
     note_due_time: {type: Date}, //may be date or may be text
 

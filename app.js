@@ -11,6 +11,7 @@ app.use(bodyParser.json())
 // in '' is prefix for future path
 app.use('/api/auth',require('./routes/auth.routes'))
 app.use('/api/room', require('./routes/room.routes'))
+app.use('/api/info', require('./routes/info.routes'))
 
 //app.use(express.json()) //built in express
 //app.use(bodyParser.json())  //great just had to move it higher sadbfgkjasbdgkjhvb
