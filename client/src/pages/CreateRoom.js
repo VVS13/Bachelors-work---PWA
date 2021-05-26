@@ -19,6 +19,10 @@ export const CreateRoom = () => {
             const data = await request('/api/room/create_room','POST',{room_name},
              {Authorization:`Bearer ${auth.token}`
             }) 
+            //from backend res.json(room) is returned
+            //which in this case is named data 
+
+
             //api to perform/method that is being used/data needed for api, gathered using value field
 
             //console.log(data._id)

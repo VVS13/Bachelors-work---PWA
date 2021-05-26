@@ -10,6 +10,8 @@ export const MainPage = () => {
     const {loading, request} = useHttp()
     const [rooms, setRooms] = useState([])
 
+
+    //here we get all rooms in room.routes all info is gathered there 
     const fetchRooms = useCallback( async () => {
         try{
             const fetched = await request('/api/room','GET',null,{Authorization: `Bearer ${token}`})
