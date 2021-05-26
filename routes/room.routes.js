@@ -45,6 +45,7 @@ router.get('/',authM, async (req, res) => {
         //if he is we can get users id through token that was saved 
         const rooms = await Room.find({owner: req.user.userId}) 
 
+
         //const user1 = await User.find({_id: req.user.userId})
 
         // const user = user({
@@ -71,9 +72,16 @@ router.get('/',authM, async (req, res) => {
     }
 })
 
-router.get('/:id',authM, async (req, res) => {
+
+
+router.get('/one/:id',authM, async (req, res) => {
+
+    //in frontend after room creation coresponding id of new room is put in link field
+    //because of that it can be gathered as param
     //so not authenticated user could not get to room by id
     try{
+
+        //req params id lets gather id of 
         const room = await Room.findById(req.params.id)
         res.json(room)
 
