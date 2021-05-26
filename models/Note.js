@@ -4,7 +4,7 @@ const schema = new Schema({
 
     note_name: {type: String, required: true},
 
-    note_text: {type: String, required: true},
+    note_text: {type: String},
 
     note_creation_time: {type: Date, required: true},
     //{new Date(note.date).toLocaleDateString()}
@@ -19,8 +19,7 @@ const schema = new Schema({
     //who_can_see: [{type: Types.ObjectId, ref: 'User'}],
     //assuming that people that are invited, can see notes, can only read
 
-    room_of_note: {type: Types.ObjectId, ref: 'Room'}, //may turn out that it is not needed
+    room_of_note: {type: Types.ObjectId, ref: 'Room',required: true}, //may turn out that it is not needed
 
 })
-
 module.exports = model('Note', schema)
