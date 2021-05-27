@@ -61,3 +61,8 @@ export const MainPage = () => {
 }
 
 
+//for 28.may - add delete room div and leave room div 
+//delete create room link and move room creation to 
+//top of home page
+
+//CLEAN UP WRITE , go through all code , WRITE BETTER COMMENTS
