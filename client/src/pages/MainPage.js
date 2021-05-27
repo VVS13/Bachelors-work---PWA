@@ -15,7 +15,7 @@ export const MainPage = () => {
     //here we get all rooms in room.routes all info is gathered there 
     const fetch_O_Rooms = useCallback( async () => {
         try{
-            
+
             const fetched = await request('/api/room/owner','GET',null,{Authorization: `Bearer ${token}`})
             set_O_Rooms(fetched)
 
@@ -59,3 +59,5 @@ export const MainPage = () => {
         </div>
     )
 }
+
+
