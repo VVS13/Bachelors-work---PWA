@@ -5,6 +5,8 @@ const config = require('config')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
 
+//rest api node js 
+
 const app = express()
 
 app.use(bodyParser.json())

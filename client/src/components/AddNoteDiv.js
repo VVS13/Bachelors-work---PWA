@@ -59,15 +59,6 @@ export const AddNoteDiv = ({ room }) => {
             console.log(dueDate,'6')
             console.log(new Date(),'7')
 
-            if(creationDate!=null){
-                const f_creationDate = format(creationDate,'dd-MM-yyyy')
-                console.log(f_creationDate,'123')
-            }
-            
-
-            
-            
-
             const data = await request(`/api/note/create_note/${room._id}`,'POST',
                 {name:new_note_name,
                 text: new_note_text,

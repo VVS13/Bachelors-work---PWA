@@ -27,7 +27,13 @@ export const RoomArrayDiv = ({o_rooms,i_rooms}) =>{
                 </React.Fragment>
             )
         })}
+    </div>
+    <div class="row justify-content-md-center bg-warning" >
+        <div>
         <p><br/>Rooms that I have been invited to<br/></p>
+        </div>
+    </div>
+    <div class="row justify-content-md-center bg-warning" >
         {i_rooms.map((room)=>{
             return (
                 

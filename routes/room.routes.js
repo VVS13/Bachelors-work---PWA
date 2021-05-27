@@ -66,15 +66,17 @@ router.get('/invited/',authM, async (req, res) => {
     try{
         //needed to create middleware to check if user is authorized or not
         //if he is we can get users id through token that was saved 
-        const rooms = await Room.find({invited: {$all:[req.user.userId]}}) 
-        //returns rooms where invited array of room has current loged user, in it 
 
-        //can request user through authM because it decodes token and toke holds user id
+        const curent_user = await User.findOne({_id:req.user.userId})
 
-        //need also to find them by user if he is in invited array of room...
 
+        const rooms = await Room.find({invited: curent_user.username})
+        //{invited: {$elemMatch: req.user.userId }} 
 
         
+
+        console.log(rooms ,' - heloooooooooo')
+
         res.json(rooms)
     }catch (e){
         res.status(500).json({message: 'Something went wrong, try again'})
@@ -98,31 +100,158 @@ router.get('/one/:id',authM, async (req, res) => {
         res.status(500).json({message: 'Something went wrong, try again'})
     }
 })
-
+// `/api/room/invite_user/${roomId}`
 router.post('/invite_user/:id',authM,async (req, res) => {
     try{
+
+        console.log('-----------------------------------------------------------')
         const {received_username} = req.body
+
+        //console.log(received_username,' - received username') // ok 
+
         const user_found = await User.findOne({username:received_username})
         const current_room = await Room.findById(req.params.id)
 
+        console.log(user_found,' - user found')
+
+        console.log(' EZ')
+
         //if user does not exist  or   is admin of current room
-        if(!user_found && user_found._id != current_room.owner){
+        if(user_found==null){
+            console.log('No such user found')
             res.status(400).json({message:'User does not exist...'})
+            return
+        }
+        // console.log('')
+        // console.log(user_found._id)
+        // console.log(req.user.userId)
+        // console.log('')
+        // console.log(user_found._id == req.user.userId)
+
+        if(user_found._id == req.user.userId){
+            console.log('Admin inviting himself...')
+            res.status(400).json({message:'You cant invite yourself...'})
+            return
         }
 
-        //probably wrong syntax
-        const already_invited = await current_room.findOne({invited: {$all:[received_username]}})
+        console.log(' EZ')
 
-        if(already_invited){
-            res.status(400).json({message:'User already invited...'})
-        }
+        // //no need of this because using $addToSet  ... stay for res output purpose
+        const invited_user_found = current_room.invited.includes(received_username)
+        console.log(invited_user_found,' - user already is in invited array')
 
+        await Room.findOneAndUpdate(
+            {_id: current_room._id},
+            {$addToSet: {invited: received_username}},
+            {useFindAndModify: false}  //to delete use pull
+            //push- can push when already such exists    addToSet - only push unique
+        )
+
+        console.log('User got added into invite array')
         
+        //await current_room()
 
-        res.status(200).json({message: 'User invited succesfuly!'})
+
+        //console.log(current_room,' - room with invited / appended user')
+
+        //console.log(current_room,'room info where geting invited')
+
+        // if(invited_user_found){
+        //     //console.log(invited_user_found,' user already invited')
+        //     res.status(400).json({message:'User already is invited...'})
+        // }
+
+
+        // if(invited_user_found){
+        //     res.status(400).json({message:'User already invited...'})
+        //     return
+        // }
+
+
+
+        res.status(201).json({message: 'User invited succesfuly!'})
 
     }catch (e){
-        console.log(e)
+        res.status(500).json({message: 'Something went wrong, try again'})
+    }
+
+})
+
+router.post('/kick_user/:id',authM,async (req, res) => {
+    try{
+
+        console.log('-----------------------------------------------------------')
+        const {received_username} = req.body
+
+        //console.log(received_username,' - received username') // ok 
+
+        const user_found = await User.findOne({username:received_username})
+        const current_room = await Room.findById(req.params.id)
+
+        console.log(user_found,' - user found')
+
+        console.log(' EZ')
+
+        //if user does not exist  or   is admin of current room
+        if(user_found==null){
+            console.log('No such user found')
+            res.status(400).json({message:'User does not exist...'})
+            return
+        }
+        // console.log('')
+        // console.log(user_found._id)
+        // console.log(req.user.userId)
+        // console.log('')
+        // console.log(user_found._id == req.user.userId)
+
+        if(user_found._id == req.user.userId){
+            console.log('Admin is deleting himself...')
+            res.status(400).json({message:'You cant kick yourself...'})
+            return
+        }
+
+        console.log(' EZ')
+
+        // //no need of this because using $addToSet  ... stay for res output purpose
+        const invited_user_found = current_room.invited.includes(received_username)
+        console.log(invited_user_found,' - user is in invited array')
+
+        await Room.findOneAndUpdate(
+            {_id: current_room._id},
+            {$pull: {invited: received_username}},
+            {useFindAndModify: false}  //to delete use pull
+            //push- can push when already such exists    addToSet - only push unique
+        )
+
+        console.log('User got deleted from invite array')
+
+
+
+
+        
+        //await current_room()
+
+
+        //console.log(current_room,' - room with invited / appended user')
+
+        //console.log(current_room,'room info where geting invited')
+
+        // if(invited_user_found){
+        //     //console.log(invited_user_found,' user already invited')
+        //     res.status(400).json({message:'User already is invited...'})
+        // }
+
+
+        // if(invited_user_found){
+        //     res.status(400).json({message:'User already invited...'})
+        //     return
+        // }
+
+
+
+        res.status(201).json({message: 'User kicked succesfuly!'})
+
+    }catch (e){
         res.status(500).json({message: 'Something went wrong, try again'})
     }
 

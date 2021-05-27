@@ -7,7 +7,7 @@ const schema = new Schema({
     owner: {type: Types.ObjectId, ref: 'User', required: true}, 
     //assuming only creator of the room will be able to create notes
 
-    invited: [{type: Types.ObjectId, ref: 'User'}],
+    invited: [{type: String}],
     //assuming that people that are invited, can see notes, can only read
 
     notes: [{type: Types.ObjectId, ref: 'Note'}],

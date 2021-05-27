@@ -21,6 +21,7 @@ export const CreateRoom = () => {
             }) 
             //from backend res.json(room) is returned
             //which in this case is named data 
+            //then we get redirected to 
 
 
             //api to perform/method that is being used/data needed for api, gathered using value field

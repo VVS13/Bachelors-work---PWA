@@ -10,6 +10,7 @@ import{RoomInfoDiv} from '../components/RoomInfoDiv'
 
 import {NoteArrayDiv} from '../components/NoteArrayDiv'
 import { AddNoteDiv } from '../components/AddNoteDiv'
+import { InviteToRoomDiv } from '../components/InviteToRoomDiv'
 
 export const NoteRoom = () => {
 
@@ -88,7 +89,7 @@ export const NoteRoom = () => {
         )
     }
 
-    console.log(room)
+    console.log(room,' - returns current room info after inviting')
 
     return (
         <div>
@@ -99,6 +100,7 @@ export const NoteRoom = () => {
                         <AddNoteDiv room ={room}/> 
                     <p>----------------------</p>
                         <p>Invite/delete person by username fild with button</p>
+                        <InviteToRoomDiv room = {room}/>
                     <p>----------------------</p>
                         <p>Invited people Array displayed as string(Array of usernames)</p>
                     <p>----------------------</p>
