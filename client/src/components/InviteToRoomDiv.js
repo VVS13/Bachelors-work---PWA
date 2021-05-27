@@ -62,10 +62,10 @@ return(
         onChange={z => setUsername(z.target.value)}
         />
         <button class="btn btn-outline-secondary" id="b1" type="button" 
-        onClick={inviteHandler}>
+        onClick={() => {inviteHandler(); refreshPage()}}>
             Invite</button>
         <button class="btn btn-outline-secondary" id="b2" type="button"
-        onClick={kickHandler}>
+        onClick={() => {kickHandler(); refreshPage()}}>
             Kick</button>
         </div>
     </div>

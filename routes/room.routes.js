@@ -257,6 +257,21 @@ router.post('/kick_user/:id',authM,async (req, res) => {
 
 })
 
+router.get('/get_invited/:id',authM,async (req, res) => {
+    try{
+
+        const current_room = await Room.findById(req.params.id)
+        const invited_to_this_room = current_room.invited
+        
+        res.json(invited_to_this_room)
+
+    }catch (e){
+        res.status(500).json({message: 'Something went wrong, try again'})
+    }
+
+})
+
+
 
 
 module.exports = router

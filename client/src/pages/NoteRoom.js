@@ -22,6 +22,8 @@ export const NoteRoom = () => {
     const roomId = useParams().id  
     const [isAdmin,setIsAdmin] = useState() 
     const [notes, setNotes] = useState([])
+
+    const [usersInvited, setUsersInvited] = useState([])
     //got named in route in App.js   (/note_room/:id) returns id of note room
 
     //id of room is gathered using useParams and stored as roomId here
@@ -59,6 +61,27 @@ export const NoteRoom = () => {
     useEffect (() => {
         fetchNotes()
     },[fetchNotes])
+
+    
+
+    const fetchInvitedUsers = useCallback( async () => { 
+    //on click event , need to use async if i want to use await
+        try{
+
+            const fetched = await request(`/api/room/get_invited/${roomId}`,'GET',null,
+            {Authorization:`Bearer ${token}`}) 
+            setUsersInvited(fetched)
+
+            console.log(fetched,'oh my gaaaaaaaaaah')
+
+        }catch(e){
+            
+        }
+    },[token,request,roomId])
+
+    useEffect (() => {
+        fetchInvitedUsers()
+    },[fetchInvitedUsers])
 
     const fetchAdmin = useCallback( async () => {
         try{
@@ -103,6 +126,7 @@ export const NoteRoom = () => {
                         <InviteToRoomDiv room = {room}/>
                     <p>----------------------</p>
                         <p>Invited people Array displayed as string(Array of usernames)</p>
+                        <p>{usersInvited}</p>
                     <p>----------------------</p>
                 </div> 
             }
