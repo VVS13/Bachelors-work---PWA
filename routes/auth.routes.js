@@ -114,9 +114,12 @@ async (req, res) =>{
             {expiresIn:'3h'}
         )
 
-        console.log('Here 4') 
+        //console.log(userId,'Here 4.5') 
 
         res.json({token, userId: user.id})
+        //on login glabajas ka res.user.id
+
+        
 
         console.log('Here 5') 
 

@@ -14,9 +14,9 @@ import { format } from 'date-fns' //compareAsc
 import {useHttp} from '../hooks/http.hook'
 import {useContext} from 'react'
 import {AuthContext} from '../context/AuthContext'
-import {useHistory} from 'react-router-dom'
+//import {useHistory} from 'react-router-dom'
 
-export const RoomDiv = ({ room }) => {
+export const AddNoteDiv = ({ room }) => {
 
     const [creationDate, setCreationDate] = useState(new Date());
     //const f_creationDate = format(creationDate,'dd-MM-yyyy')
@@ -37,7 +37,15 @@ export const RoomDiv = ({ room }) => {
 
     const {request} = useHttp() 
     const auth = useContext(AuthContext) //has token 
-    const history = useHistory()
+    //const history = useHistory()
+
+    function refreshPage() {
+        window.location.reload(false); //deprecated
+    } 
+
+    //will use after action has been performed by any handler
+
+    //deprecated
 
 
     const createNoteHandler = async event => { 
@@ -76,11 +84,6 @@ export const RoomDiv = ({ room }) => {
             
         }
     }
-
-
-
-
-
 
     if(!room){
         return<div>Loading....</div>
@@ -152,21 +155,12 @@ export const RoomDiv = ({ room }) => {
                     class="btn btn-outline-secondary" 
                     type="button" 
                     id="button-addon2"
-                    onClick={createNoteHandler}
+                    onClick={() => { createNoteHandler() ; refreshPage()}}
                     >
                         Add new note
                     </button>
                 </div>
                 
-            </div>
-            
-            
-
-            <h1>Room: <strong>{room.room_name}</strong> </h1>
-            <h6>Room id: <strong>{room._id}</strong> </h6>
-            
-            <div>
-                {/* here display all notes of coresponding room using map */}
             </div>
             
         </div>

@@ -1,6 +1,7 @@
 const {Router,Date} = require('express')
 
 const Note = require('../models/Note')
+const Room = require('../models/Room')
 
 const authM = require('../middleware/auth.middleware')
 //const config = require('config') // for base url
@@ -65,6 +66,34 @@ router.get('/:id',authM, async (req, res) => {
 
     }catch (e){
         res.status(500).json({message: 'Something went wrong, try again'})
+    }
+})
+
+
+//    `/api/note/is_admin/${roomId}`
+router.get('/is_admin/:id',authM, async (req, res) => {
+    try{
+        
+        const current_room = await Room.findOne({_id: req.params.id}) 
+        const owner_of_current_room = current_room.owner
+        const curent_user = req.user.userId
+
+        //console.log(current_room,' - 111 ')
+        //console.log(curent_user,' - 222')
+        //console.log(owner_of_current_room,' - 333')
+        
+        var is_admin = false
+
+        if(owner_of_current_room==curent_user){
+            is_admin = true
+        }
+
+        //console.log(is_admin,' admin info after if cycle')   //gives right output here
+
+        res.json(is_admin)
+
+    }catch (e){
+        console.log(e)
     }
 })
 

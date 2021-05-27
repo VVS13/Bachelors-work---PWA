@@ -1,12 +1,12 @@
 import  React from 'react';
 
-import {useHttp} from '../hooks/http.hook'
+//import {useHttp} from '../hooks/http.hook'
 
 
 export const NoteArrayDiv = ({notes}) =>{
 
     
-    const {loading} = useHttp()
+    //const {loading} = useHttp()
     
     if(!notes.length) {
         return <p className="container">You have no notes...</p>

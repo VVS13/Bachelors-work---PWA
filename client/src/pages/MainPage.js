@@ -8,16 +8,29 @@ export const MainPage = () => {
 
     const {token} = useContext(AuthContext) // to authorize
     const {loading, request} = useHttp()
-    const [rooms, setRooms] = useState([])
+    const [o_rooms, set_O_Rooms] = useState([])
+    const [i_rooms, set_I_Rooms] = useState([])
 
 
     //here we get all rooms in room.routes all info is gathered there 
-    const fetchRooms = useCallback( async () => {
+    const fetch_O_Rooms = useCallback( async () => {
         try{
-            const fetched = await request('/api/room','GET',null,{Authorization: `Bearer ${token}`})
-            setRooms(fetched)
+            const fetched = await request('/api/room/owner','GET',null,{Authorization: `Bearer ${token}`})
+            set_O_Rooms(fetched)
 
             console.log(fetched,'aaaaaaaaaaaaaaaaa')
+
+        }catch(e){
+            console.log(e)
+        }
+    },[token,request])
+
+    const fetch_I_Rooms = useCallback( async () => {
+        try{
+            const fetched = await request('/api/room/invited','GET',null,{Authorization: `Bearer ${token}`})
+            set_I_Rooms(fetched)
+
+            console.log(fetched,'bbbbbbbbbbbbbbbbbb')
 
         }catch(e){
             console.log(e)
@@ -27,8 +40,9 @@ export const MainPage = () => {
     //console.log(rooms,'aaaaaaaaaaaaaaaaa')
 
     useEffect (() => {
-        fetchRooms()
-    },[fetchRooms])
+        fetch_O_Rooms()
+        fetch_I_Rooms()
+    },[fetch_O_Rooms,fetch_I_Rooms])
 
     if(loading){
         return<div>Loading....</div>
@@ -38,8 +52,8 @@ export const MainPage = () => {
         <div>
 
             <h1>MainPage</h1>
-            
-            <RoomArrayDiv rooms = {rooms}/>
+            {/* 1st variable is the one being sent 2nd is the one it is being set to  */}
+            <RoomArrayDiv o_rooms = {o_rooms} i_rooms = {i_rooms}/> 
 
         </div>
     )
