@@ -16,14 +16,17 @@ export const RoomArrayDiv = ({o_rooms,i_rooms}) =>{
         {o_rooms.map((room)=>{
             return (
                 <React.Fragment  key={room._id}>
-                <Link to={`/note_room/${room._id}`}>
-                <div class="p-3 mb-2 col-lg-5 bg-light" style={{margin: '0rem 2rem'}}>
-                    Room name: {room.room_name}
-                    <br/>
-                    Room id: {room._id}
-                    <br/>
+                <div class="p-3 mb-2 col-lg-3 bg-light" style={{margin: '0rem 2rem'}}>
+                    <Link to={`/note_room/${room._id}`}>
+                    <div>
+                        Room name: {room.room_name}
+                    </div>
+                    </Link>
+                    <div>
+                        <br/>Room id: {room._id}
+                    </div>
                 </div>
-                </Link>
+                
                 </React.Fragment>
             )
         })}
@@ -36,16 +39,17 @@ export const RoomArrayDiv = ({o_rooms,i_rooms}) =>{
     <div class="row justify-content-md-center bg-warning" >
         {i_rooms.map((room)=>{
             return (
-                
                 <React.Fragment  key={room._id}>
-                <Link to={`/note_room/${room._id}`}>
-                <div class="p-3 mb-2 col-lg-5 bg-light" style={{margin: '0rem 2rem'}}>
-                    Room name: {room.room_name}
-                    <br/>
-                    Room id: {room._id}
-                    <br/>
+                <div class="p-3 mb-2 col-lg-3 bg-light" style={{margin: '0rem 2rem'}}>
+                    <Link to={`/note_room/${room._id}`}>
+                    <div>
+                        Room name: {room.room_name}
+                    </div>
+                    </Link>
+                    <div>
+                        <br/>Room id: {room._id}
+                    </div>
                 </div>
-                </Link>
                 </React.Fragment>
             )
         })}
