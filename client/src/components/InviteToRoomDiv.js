@@ -69,9 +69,6 @@ return(
             Kick</button>
         </div>
     </div>
-
-    
-
 )
 
 

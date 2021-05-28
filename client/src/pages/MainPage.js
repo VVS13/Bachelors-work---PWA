@@ -4,6 +4,10 @@ import {AuthContext} from '../context/AuthContext'
 import {useHttp} from '../hooks/http.hook'
 import {RoomArrayDiv} from '../components/RoomArrayDiv'
 
+import {RoomCreateDiv} from '../components/RoomCreateDiv'
+
+import {RoomRemoveDiv} from '../components/RoomRemoveDiv'
+
 export const MainPage = () => {
 
     const {token} = useContext(AuthContext) // to authorize
@@ -51,6 +55,10 @@ export const MainPage = () => {
 
     return (
         <div>
+
+            <RoomCreateDiv/>
+            
+            <RoomRemoveDiv/>
 
             <h1>MainPage</h1>
             {/* 1st variable is the one being sent 2nd is the one it is being set to  */}

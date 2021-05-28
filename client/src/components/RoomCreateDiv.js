@@ -1,11 +1,10 @@
-
 import React, {useState} from 'react'
 import {useHttp} from '../hooks/http.hook'
 import {useContext} from 'react'
 import {AuthContext} from '../context/AuthContext'
 import {useHistory} from 'react-router-dom'
 
-export const CreateRoom = () => {
+export const RoomCreateDiv = () => {
 
     const {request} = useHttp() 
     const [room_name, setRoomName] = useState('')
@@ -39,38 +38,30 @@ export const CreateRoom = () => {
     }
 
     return (
-        <div style={{padding: '1rem 2rem'}}>
+        <div style={{padding: '0rem 2rem'}}>
 
-            <h1>CreateRoom</h1>
+                <p>Create room : </p>
+                <div class="input-group mb-3">
+                    <input 
+                    class="form-control" 
+                    placeholder="Set name of new room"
+                    type="String" 
+                    id="new room name"  
+                    name="room name"
+                    value={room_name}
+                    onChange={e => setRoomName(e.target.value)}
+                    />
+                    <button 
+                    class="btn btn-outline-secondary" 
+                    type="button" 
+                    id="crb"
+                    onClick={createRoomHandler}
+                    >
+                        Create room
+                    </button>
+                </div>
 
-            <br/>
-
-            <h2>Delete selected room</h2>
-            <select class="form-control form-control-lg">
-                <option>-------------</option>
-                <option>1111111111111</option>
-                <option>2222222222222</option>
-                <option>3333333333333</option>
-            </select>
-
-            <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1"/>
-            <label class="form-check-label" for="defaultCheck1">
-                Are you sure you want to delete this room?
-            </label>
-            </div>
-            <div className="col">
-
-                <button className="btn btn-danger container-fluid "
-                type="submit" 
-                >DELETE</button>
-
-            </div>
-
-            <br/>
-
-            <p>----------------------------------------</p>
-            <h2>Create room</h2>
+            {/* <h2>Create room</h2>
             <h6>Input room name</h6>
             <div>
                 <input className="form-control p-3"
@@ -89,34 +80,7 @@ export const CreateRoom = () => {
                 type="submit" 
                 onClick={createRoomHandler} //
                 >Create</button>
-            </div>
-
-            <br/>
-
-            <p>----------------------------------------</p>
-            <h2>Join room</h2>
-            <h6>Input room id or room time key</h6>
-            <div>
-                <input className="form-control p-3"
-                type="text" 
-                id="add_room"  
-                name="add_room"
-                ></input>
-                <br/>
-            </div>
-
-
-            <div>
-                <button className="btn btn-success container-fluid "
-                type="submit" 
-                >Enter</button>
-            </div>
-
-            <br/>
-
-
-
-
+            </div> */}
 
         </div>
     )

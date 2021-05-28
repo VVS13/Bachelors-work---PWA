@@ -19,7 +19,7 @@ export const NoteArrayDiv = ({notes}) =>{
         {notes.map((note)=>{
             return (
                 <React.Fragment  key={note._id}>
-                <div class="p-3 mb-2 col-lg-5 bg-light" style={{margin: '0rem 2rem'}}>
+                <div class="p-3 mb-2 col-lg-5 bg-light"style={{margin: '0.5rem 0.5rem'}} > 
                     Created: {note.note_creation_time}
                     <br/>
                     Due: {note.note_due_time}

@@ -53,10 +53,6 @@ function App() {
             </Route>
             {/* <Redirect to="/main_page"/> */}
   
-            <Route path="/create_room">
-              <CreateRoom/>
-            </Route>
-  
             <Route path="/note_room/:id">
               <NoteRoom/>
             </Route>

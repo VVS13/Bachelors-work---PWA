@@ -115,18 +115,18 @@ export const NoteRoom = () => {
     console.log(room,' - returns current room info after inviting')
 
     return (
-        <div>
+        <div style={{padding: '1rem 2rem'}}>
             {/* can put false to see what non admin user will see  */}
             {isAdmin===true &&  
-                <div>
+                <div class="bg-light border border-warning" style={{padding: '1rem 2rem'}}>
                     <p>----------------------</p>
-                        <AddNoteDiv room ={room}/> 
+                        <p>Create/Add new note : </p>
+                        <AddNoteDiv room ={room} /> 
                     <p>----------------------</p>
-                        <p>Invite/delete person by username fild with button</p>
+                        <p>Invite/Kick user by username : </p>
                         <InviteToRoomDiv room = {room}/>
                     <p>----------------------</p>
-                        <p>Invited people Array displayed as string(Array of usernames)</p>
-                        <p>{usersInvited}</p>
+                        <p>Invited users : {usersInvited}</p>
                     <p>----------------------</p>
                 </div> 
             }
