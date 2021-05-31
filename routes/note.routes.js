@@ -97,4 +97,26 @@ router.get('/is_admin/:id',authM, async (req, res) => {
     }
 })
 
+router.post('/delete_note/:id',authM,async (req, res) => {
+    try{
+
+        console.log('-----------------------------------------------------------')
+        const {received_note_id} = req.body //string id
+
+        //const current_room = await Room.findOne({_id: req.params.id}) 
+
+        //const all_notes_of_room = await Note.find({room_of_note:req.params.id})
+
+        const note_to_delete = await Note.findOne({$and : [{_id: ObjectId(received_note_id)},{room_of_note:req.params.id}]})
+
+        console.log(note_to_delete, ' - yep this note found')
+
+        res.status(201).json({message: 'Note has been deleted!'})
+
+    }catch (e){
+        res.status(400).json({message: 'Wrong note id inputed...'})
+    }
+
+})
+
 module.exports = router

@@ -30,7 +30,8 @@ export const NoteArrayDiv = ({notes}) =>{
                     <br/>
                     Text: {note.note_text}
                     <br/>
-                    room of note: {note.room_of_note}
+                    Note id : {note._id}
+                    {/* room of note: {note.room_of_note} */}
                     <br/>
 
                 </div>

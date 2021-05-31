@@ -11,6 +11,7 @@ import{RoomInfoDiv} from '../components/RoomInfoDiv'
 import {NoteArrayDiv} from '../components/NoteArrayDiv'
 import { AddNoteDiv } from '../components/AddNoteDiv'
 import { InviteToRoomDiv } from '../components/InviteToRoomDiv'
+import { DeleteNoteDiv } from '../components/DeleteNoteDiv'
 
 export const NoteRoom = () => {
 
@@ -126,7 +127,9 @@ export const NoteRoom = () => {
                         <p>Invite/Kick user by username : </p>
                         <InviteToRoomDiv room = {room}/>
                     <p>----------------------</p>
-                        <p>Invited users : {usersInvited}</p>
+                        <p>Invited users : {usersInvited.toString()}</p>
+                    <p>----------------------</p>
+                        <p>Delete note : <DeleteNoteDiv room ={room} /></p>
                     <p>----------------------</p>
                 </div> 
             }

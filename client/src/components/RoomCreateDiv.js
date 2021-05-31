@@ -60,28 +60,6 @@ export const RoomCreateDiv = () => {
                         Create room
                     </button>
                 </div>
-
-            {/* <h2>Create room</h2>
-            <h6>Input room name</h6>
-            <div>
-                <input className="form-control p-3"
-                type="String" 
-                id="new room name"  
-                name="room name"
-                value={room_name}
-                onChange={e => setRoomName(e.target.value)}
-                ></input>
-                <br/>
-            </div>
-
-
-            <div>
-                <button className="btn btn-success container-fluid "
-                type="submit" 
-                onClick={createRoomHandler} //
-                >Create</button>
-            </div> */}
-
         </div>
     )
 }
