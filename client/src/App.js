@@ -8,7 +8,6 @@ import {useAuth} from './hooks/auth.hook'
 import {AuthContext} from './context/AuthContext'
 
 import {MainPage} from './pages/MainPage'
-import {CreateRoom} from './pages/CreateRoom'
 import {NoteRoom} from './pages/NoteRoom'
 import {AuthPage} from './pages/AuthPage'
 

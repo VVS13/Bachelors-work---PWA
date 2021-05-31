@@ -19,19 +19,13 @@ export const Navbar = () => {
         //when it is coppied even original code in naroved form is not opening the menu using button 
         //need to be solved important
 
-        <nav class="navbar navbar-expand-sm navbar-light bg-light" style={{padding: '1rem 2rem'}}>
-        <a class="navbar-brand" href="/">App name</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <nav class="navbar navbar-expand navbar-light bg-light" style={{padding: '1rem 2rem'}}>
+        <a class="navbar-brand" href="/">ShShoLi</a>
+        <div class="" id="navbarNav">
             <ul class="navbar-nav">
             <li class="nav-item active">
                 <a class="nav-link" href="/">Home </a> 
                 {/*  span after home is not working <span class="sr-only">(current)</span> */}
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="create_room">Create room</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/" onClick={logoutHandler} >Logout</a>

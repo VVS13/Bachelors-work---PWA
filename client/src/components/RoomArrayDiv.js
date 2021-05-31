@@ -23,7 +23,7 @@ export const RoomArrayDiv = ({o_rooms,i_rooms}) =>{
                     </div>
                     </Link>
                     <div>
-                        <br/>Room id: {room._id}
+                        <br/>Room id: <br/>{room._id}
                     </div>
                 </div>
                 
@@ -31,12 +31,13 @@ export const RoomArrayDiv = ({o_rooms,i_rooms}) =>{
             )
         })}
     </div>
-    <div class="row justify-content-md-center bg-warning" >
-        <div>
+    <div class="row justify-content-md-center bg-warning text-center" >
+        <div >
         <p><br/>Rooms that I have been invited to<br/></p>
         </div>
     </div>
     <div class="row justify-content-md-center bg-warning" >
+        
         {i_rooms.map((room)=>{
             return (
                 <React.Fragment  key={room._id}>
@@ -47,7 +48,7 @@ export const RoomArrayDiv = ({o_rooms,i_rooms}) =>{
                     </div>
                     </Link>
                     <div>
-                        <br/>Room id: {room._id}
+                        <br/>Room id: <br/>{room._id}
                     </div>
                 </div>
                 </React.Fragment>

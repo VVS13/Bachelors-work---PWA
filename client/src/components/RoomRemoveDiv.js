@@ -10,19 +10,37 @@ export const RoomRemoveDiv = () => {
     const [remRoomId, setRemRoomId] = useState('')
     const auth = useContext(AuthContext) //has token 
     
-    // const createRoomHandler = async event => { 
-    //     try{
+    const deleteRoomHandler = async event => { 
+        try{
 
-    //         const data = await request('/api/room/create_room','POST',{room_name},
-    //          {Authorization:`Bearer ${auth.token}`
-    //         }) 
+            console.log(remRoomId,'- room id in handler')
 
-
-
-    //     }catch(e){
+            await request('/api/room/delete_my_room','POST',{received_room_id:remRoomId},
+             {Authorization:`Bearer ${auth.token}`
+            })
             
-    //     }
-    // }
+            console.log('BONKED')
+
+        }catch(e){
+            
+        }
+    }
+
+    const leaveRoomHandler = async event => { 
+        try{
+
+            console.log(remRoomId,'- room id in handler')
+
+            await request('/api/room/leave_room','POST',{received_room_id:remRoomId},
+             {Authorization:`Bearer ${auth.token}`
+            })
+            
+            console.log('BONKED')
+
+        }catch(e){
+            
+        }
+    }
 
     return (
         <div style={{padding: '0rem 2rem'}}>
@@ -37,16 +55,17 @@ export const RoomRemoveDiv = () => {
                     placeholder="Input room id" 
                     onChange={z => setRemRoomId(z.target.value)}
                     />
+
                     <button class="btn btn-outline-secondary" id="b1" type="button" 
-
+                    onClick={leaveRoomHandler}
                     //onClick={() => {inviteHandler(); refreshPage()}}
-                    >
-                        Leave</button>
-                    <button class="btn btn-outline-secondary" id="b2" type="button"
+                    >Leave</button>
 
+                    <button class="btn btn-outline-secondary" id="b2" type="button"
+                    onClick={deleteRoomHandler}
                     //onClick={() => {kickHandler(); refreshPage()}}
-                    >
-                        Delete</button>
+                    >Delete</button>
+                    
                     </div>
                 </div>
             <br/>

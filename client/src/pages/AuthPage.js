@@ -48,16 +48,16 @@ export const AuthPage = () => {
     
 
     return (
-        <div className="container"> 
-            <h1>Auth Page</h1>
+        <div class="col w-100 h-100 text-center " > 
+            <h1>Shared shopping list</h1>
             
 
-            <div className="container-sm bg-dark text-white p-3 ">
+            <div  class="container-sm bg-secondary text-white p-3 border border-warning " > 
 
                 <div className="row">
                     <div className="col">
                         <div className="container" >
-                        <h1 className="text-center">register form</h1>
+                        <h3 className="text-center">register form</h3>
 
                         <p>please input your username</p>
                         <input className="form-control p-3"
@@ -74,11 +74,7 @@ export const AuthPage = () => {
                          name="password"
                         onChange={changeHandler}
                         ></input>
-
-                            <div className="p-1">
-                                <input type="checkbox" className="form-check-input" id="exampleCheck1"></input>
-                                <label className="form-check-label" for="exampleCheck1">-maybe use for caching username and password </label>
-                            </div>
+                        <br/>
                         </div>
                     </div>
                 </div>

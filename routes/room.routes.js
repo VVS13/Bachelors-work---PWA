@@ -8,6 +8,8 @@ const authM = require('../middleware/auth.middleware')
 
 const router = Router()
 
+const ObjectId = require('mongodb').ObjectID
+
 router.post('/create_room',authM,async (req, res) => {
     //added authM so non authentificated users could not create rooms
     //and I could identify user through it by getting id
@@ -225,30 +227,6 @@ router.post('/kick_user/:id',authM,async (req, res) => {
 
         console.log('User got deleted from invite array')
 
-
-
-
-        
-        //await current_room()
-
-
-        //console.log(current_room,' - room with invited / appended user')
-
-        //console.log(current_room,'room info where geting invited')
-
-        // if(invited_user_found){
-        //     //console.log(invited_user_found,' user already invited')
-        //     res.status(400).json({message:'User already is invited...'})
-        // }
-
-
-        // if(invited_user_found){
-        //     res.status(400).json({message:'User already invited...'})
-        //     return
-        // }
-
-
-
         res.status(201).json({message: 'User kicked succesfuly!'})
 
     }catch (e){
@@ -267,6 +245,77 @@ router.get('/get_invited/:id',authM,async (req, res) => {
 
     }catch (e){
         res.status(500).json({message: 'Something went wrong, try again'})
+    }
+
+})
+
+router.post('/delete_my_room/',authM,async (req, res) => {
+    try{
+
+        console.log('-----------------------------------------------------------')
+
+        const {received_room_id} = req.body
+
+
+        await Room.findOneAndDelete({$and : [{_id: ObjectId(received_room_id)},{owner: req.user.userId}]}) 
+        
+
+        res.status(201).json({message: '......... '})//You have no room with such id...
+
+    }catch (e){
+        //console.log(e)
+        console.log('catch delete')
+        res.status(500).json({message: 'Wrong room id - check inputed room id'})
+    }
+
+})
+
+
+router.post('/leave_room/',authM,async (req, res) => {
+    try{
+
+        console.log('-----------------------------------------------------------')
+
+        const {received_room_id} = req.body
+        //id received from front-end
+
+        const curent_user = await User.findOne({_id:req.user.userId}) 
+        //user that is currently logged in...to use his data for checks
+
+        const all_rooms_where_invited = await Room.find({invited: curent_user.username})
+        //array of all rooms where current-user is invited
+
+        const bool_array = all_rooms_where_invited.map(e => String(e._id) === String(received_room_id)) //room_found._id
+        //checking if any room in all_rooms_where_invited has same id as received 
+        //this returns array of true and false statements 
+
+        const bool_array_true = bool_array.includes(true)
+        //checking if bool_array contains one true value
+        //if it is true we can find coresponding room using received_room_id
+
+        if(bool_array_true==true){ 
+            await Room.findOneAndUpdate(
+
+                {_id: ObjectId(received_room_id)},  
+                //turns received string room id to ObjectId type
+                {$pull: {invited: curent_user.username}},
+                //deletes if invited has current 
+                {useFindAndModify: false}  
+
+            )
+            
+            console.log('cycle complete')
+
+            res.status(201).json({message: 'Epic bruh moment --- dude left the room!'})
+
+        }
+
+        res.status(400).json({message: ' You have no such (invited room)...'})
+
+    }catch (e){
+        console.log(e)
+        console.log('catch leave')
+        res.status(500).json({message: 'Wrong room id - check inputed room id'})
     }
 
 })

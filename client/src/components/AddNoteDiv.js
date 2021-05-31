@@ -148,7 +148,7 @@ export const AddNoteDiv = ({ room }) => {
                     id="button-addon2"
                     onClick={() => { createNoteHandler() ; refreshPage()}}
                     >
-                        Add new note
+                        Add note
                     </button>
                 </div>
                 
