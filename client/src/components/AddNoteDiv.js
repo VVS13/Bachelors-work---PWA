@@ -18,46 +18,41 @@ import {AuthContext} from '../context/AuthContext'
 
 export const AddNoteDiv = ({ room }) => {
 
-    const [creationDate, setCreationDate] = useState(new Date());
-    //const f_creationDate = format(creationDate,'dd-MM-yyyy')
+    const today = new Date()
+    const tomorrow = new Date(today)
+    tomorrow.setDate(tomorrow.getDate() + 1)
+
+    const [creationDate, setCreationDate] = useState(today);
+    //date when note has been created
 
     const [dueDate, setDueDate] = useState(null);
-    //console.log(dueDate)\
-    //const f_dueDate = format(dueDate,'dd-MM-yyyy')
+    //informative field for users with due date - 
+    //- till which the assignment certified in note needs to be complete
 
-    const [deletionDate, setDeletionDate] = useState(null);
+    const [deletionDate, setDeletionDate] = useState(tomorrow);
+    //date till which note exists - 
+    //after today date becomes bigger than deletion date - note is deleted
+
 
     const [new_note_name, setNewNoteName] = useState('')
-    const [new_note_text, setNewNoteText] = useState('')
-    
-    //make other dates unavailable that are before tomorrow
+    //setting note name
 
-    //console.log(f_creationDate)
+    const [new_note_text, setNewNoteText] = useState('')
+    //setting note tex/ asignment information
 
 
     const {request} = useHttp() 
-    const auth = useContext(AuthContext) //has token 
-    //const history = useHistory()
+
+    const auth = useContext(AuthContext) //has token also holds id
 
     function refreshPage() {
         window.location.reload(false); //deprecated
     } 
-
-    //will use after action has been performed by any handler
-
-    //deprecated
-
+    //will be used to refresh the page after request for note creation has been sent
+    //to display it instantly 
 
     const createNoteHandler = async event => { 
         try{
-
-            console.log(room._id,'1')
-            console.log(new_note_name,'2')
-            console.log(new_note_text,'3')
-            console.log(creationDate,'4')
-            console.log(deletionDate,'5')
-            console.log(dueDate,'6')
-            console.log(new Date(),'7')
 
             const data = await request(`/api/note/create_note/${room._id}`,'POST',
                 {name:new_note_name,
@@ -103,7 +98,8 @@ export const AddNoteDiv = ({ room }) => {
                         selected={creationDate} 
                         onChange={date => setCreationDate(date)}
                         //includeDates={[new Date(), (new Date(),1)]}
-                        placeholderText="Deletion date" 
+                        disabled
+                        placeholderText="Creation date" 
                         />
                         <p>Created @:{format(creationDate,'dd-MM-yyyy').toString()}</p>
                     </div>
@@ -113,6 +109,8 @@ export const AddNoteDiv = ({ room }) => {
                         dateFormat="dd/MM/yyyy"
                         selected={dueDate} 
                         onChange={date => setDueDate(date)}
+                        minDate={tomorrow}
+                        maxDate={deletionDate}
                         //includeDates={[new Date(), (new Date(),1)]}
                         placeholderText="Due date" 
                         />
@@ -125,11 +123,12 @@ export const AddNoteDiv = ({ room }) => {
                         dateFormat="dd/MM/yyyy"
                         selected={deletionDate} 
                         onChange={date => setDeletionDate(date)}
-                        //includeDates={[new Date(), (new Date(),1)]}
-                        placeholderText="Deletion date" 
+                        minDate={tomorrow}
+
+                        placeholderText="Deletion date"
+
                         />
-                        {!deletionDate && <p>Deleted @: No deletion Date</p>}
-                        {deletionDate && <p>Deleted @:{format(deletionDate,'dd-MM-yyyy').toString()}</p>}
+                        <p>Deleted @:{format(deletionDate,'dd-MM-yyyy').toString()}</p>
                     </div>
                 </div>
                     <div class="input-group mb-3">

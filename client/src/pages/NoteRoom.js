@@ -86,7 +86,8 @@ export const NoteRoom = () => {
 
     const fetchAdmin = useCallback( async () => {
         try{
-            const fetched = await request(`/api/note/is_admin/${roomId}`,'GET',null,{Authorization: `Bearer ${token}`})
+            const fetched = await request(`/api/note/is_admin/${roomId}`,'GET',null,
+            {Authorization: `Bearer ${token}`})
             setIsAdmin(fetched)
 
             //console.log(fetched,'fetched admin bool result') //correct
@@ -129,7 +130,8 @@ export const NoteRoom = () => {
                     <p>----------------------</p>
                         <p>Invited users : {usersInvited.toString()}</p>
                     <p>----------------------</p>
-                        <p>Delete note : <DeleteNoteDiv room ={room} /></p>
+                        <p>Delete note : </p>
+                        <DeleteNoteDiv room ={room} />
                     <p>----------------------</p>
                 </div> 
             }

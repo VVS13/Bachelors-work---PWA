@@ -8,7 +8,7 @@ import {AuthContext} from '../context/AuthContext'
 export const DeleteNoteDiv = ({ room }) => {
 
 const {request} = useHttp() 
-const auth = useContext(AuthContext) 
+const {token} = useContext(AuthContext) 
 const [note_id, setNoteId] = useState('')
 
 
@@ -18,11 +18,12 @@ const deleteNoteHandler = async event => {
 
         console.log(' zzzzzzzzz')
 
-        await request(`/api/note/deleteNote/${room._id}`,'POST',{received_note_id:note_id},
-            {Authorization:`Bearer ${auth.token}`
+        await request(`/api/note/delete_note/${room._id}`,'POST',{received_note_id:note_id},
+            {Authorization:`Bearer ${token}`
         }) 
 
-        console.log('Ez delete note request')
+
+        console.log('Ez delete note request complete ')
 
     }catch(e){
         console.log(e)
@@ -44,8 +45,8 @@ return(
         onChange={z => setNoteId(z.target.value)}
         />
         <button class="btn btn-outline-secondary" id="b1" type="button" 
-        onClick={deleteNoteHandler}  // this one for testing 
-        //onClick={() => {inviteHandler(); refreshPage()}}
+        //onClick={deleteNoteHandler}  // this one for testing 
+        onClick={() => {deleteNoteHandler(); refreshPage()}}
         >
             Delete</button>
         </div>

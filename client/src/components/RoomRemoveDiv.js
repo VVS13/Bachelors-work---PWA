@@ -42,6 +42,10 @@ export const RoomRemoveDiv = () => {
         }
     }
 
+    function refreshPage() {
+        window.location.reload(false); //deprecated
+    } 
+
     return (
         <div style={{padding: '0rem 2rem'}}>
 
@@ -57,13 +61,13 @@ export const RoomRemoveDiv = () => {
                     />
 
                     <button class="btn btn-outline-secondary" id="b1" type="button" 
-                    onClick={leaveRoomHandler}
-                    //onClick={() => {inviteHandler(); refreshPage()}}
+                    //onClick={leaveRoomHandler}
+                    onClick={() => {leaveRoomHandler(); refreshPage()}}
                     >Leave</button>
 
                     <button class="btn btn-outline-secondary" id="b2" type="button"
-                    onClick={deleteRoomHandler}
-                    //onClick={() => {kickHandler(); refreshPage()}}
+                    //onClick={deleteRoomHandler}
+                    onClick={() => {deleteRoomHandler(); refreshPage()}}
                     >Delete</button>
                     
                     </div>
