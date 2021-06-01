@@ -6,7 +6,6 @@ const schema = new Schema({
     
     password: {type: String, required: true},
 
-    note_rooms: [{type: Types.ObjectId, ref: 'Room'}]
 
 })
 

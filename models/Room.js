@@ -10,7 +10,6 @@ const schema = new Schema({
     invited: [{type: String}],
     //assuming that people that are invited, can see notes, can only read
 
-    notes: [{type: Types.ObjectId, ref: 'Note'}],
 
 })
 
