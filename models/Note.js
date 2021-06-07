@@ -1,25 +1,26 @@
+
 const {Schema, model, Types} = require('mongoose')
 
 const schema = new Schema({
 
     note_name: {type: String, required: true},
+    //obligatory field for task name specification
 
     note_text: {type: String},
+    //informative field for task specification
 
     note_creation_time: {type: Date, required: true},
-    //{new Date(note.date).toLocaleDateString()}
+    //Will hold date of when note was created
 
     note_deletion_time: {type: Date},
+    //will hold date of when note should be deleted
 
-    note_due_time: {type: Date}, //may be date or may be text
+    note_due_time: {type: Date}, 
+    //informative date for user task due date specification
 
-    //writer: {type: Types.ObjectId, ref: 'User', required: true}, 
-    //assuming only creator of the room will be able to create notes
-
-    //who_can_see: [{type: Types.ObjectId, ref: 'User'}],
-    //assuming that people that are invited, can see notes, can only read
-
-    room_of_note: {type: Types.ObjectId, ref: 'Room',required: true}, //may turn out that it is not needed
+    room_of_note: {type: Types.ObjectId, ref: 'Room',required: true}, 
+    //Id of room where note got created will be saved 
 
 })
 module.exports = model('Note', schema)
+
